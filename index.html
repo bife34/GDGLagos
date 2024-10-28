@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+    <title>GDG Lagos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=w4btYDGPlbiB85cFVFEJRCKYkQ3akKVjdsbH1rS9ObfpZc2nHmKvT6Ar0OUij-eEEX9t1Xp2ftVe2mm4eeemCmOshhsA01vTYXNh2XNm2bgpqNoTLysJ2wnm1FVAtVV4TnMQToOVw882oiuNoNmANiMJ-fksNpCBHAYcx1DaFX7LPE2PdKm5V-hB_t7W_vxO" charset="UTF-8"></script><style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ddd;
+            background-color: #0a0a0a;
+        }
+
+        /* Matrix-like background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0,
+                    transparent 1px,
+                    rgba(0, 255, 0, 0.1) 1px,
+                    rgba(0, 255, 0, 0.1) 2px
+                );
+            background-size: 100% 2px;
+            animation: scan 1s linear infinite;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* Container for the main content and code decoration */
+        .main-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Left scrolling code */
+        .code-scroll-left {
+            position: absolute;
+            left: 50px;
+            height: 100%;
+            width: 30px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .code-scroll-left::after {
+            content: '{ code } < /> $ git push origin main _ npm install webpack build docker run dev test lint fix commit push';
+            position: absolute;
+            color: rgba(0, 255, 0, 0.15);
+            font-size: 1rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            white-space: nowrap;
+            animation: scrollUp 20s linear infinite;
+        }
+
+        /* Right scrolling code */
+        .code-scroll-right {
+            position: absolute;
+            right: 50px;
+            height: 100%;
+            width: 30px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .code-scroll-right::after {
+            content: 'const async function () => { return data } export default class extends React useState useEffect';
+            position: absolute;
+            color: rgba(0, 255, 0, 0.15);
+            font-size: 1rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            white-space: nowrap;
+            animation: scrollDown 20s linear infinite;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 90vh;
+            width: 100%;
+            padding: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 255, 0, 0.1),
+                rgba(0, 0, 255, 0.1)
+            );
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            position: relative;
+        }
+
+        /* Glitch effect on image */
+        .container img:hover {
+            animation: glitch 0.3s infinite;
+        }
+
+        footer {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(20, 20, 20, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            z-index: 1;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        .contact-email {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #0f0;
+        }
+
+        .contact-email a {
+            color: #0f0;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .contact-email a:hover {
+            text-decoration: none;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: #0f0;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(2px); }
+        }
+
+        @keyframes scrollUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+       @keyframes glitch {
+    0% { 
+        filter: hue-rotate(0deg);
+    }
+    25% { 
+        filter: hue-rotate(90deg);
+    }
+    50% { 
+        filter: hue-rotate(180deg);
+    }
+    75% { 
+        filter: hue-rotate(270deg);
+    }
+    100% { 
+        filter: hue-rotate(360deg);
+    }
+        }
+
+        @media (max-width: 768px) {
+            .code-scroll-left {
+                left: 20px;
+            }
+            
+            .code-scroll-right {
+                right: 20px;
+            }
+
+            .code-scroll-left::after,
+            .code-scroll-right::after {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            footer {
+                margin: 10px;
+                padding: 15px;
+                margin-top: -50px; /* Move footer higher on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="code-scroll-left"></div>
+        <div class="container">
+            <img src="gdglagos.png" alt="Central Image" id="center-image">
+        </div>
+        <footer>
+            <div class="contact-email">
+                Contacte-nos: <a href="mailto:your-email@example.com">your-email@example.com</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://x.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </footer>
+        <div class="code-scroll-right"></div>
+    </div>
+</body>
+</html>
+
