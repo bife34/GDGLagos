@@ -1,0 +1,286 @@
+:root {
+  /* Main colors */
+  --color-background: #0a0a0a;
+  --color-text: #ddd;
+  --color-accent: #0f0;
+
+  /* Matrix effects */
+  --color-matrix-overlay: rgba(10, 10, 10, 0.8);
+  --color-matrix-lines: rgba(0, 255, 0, 0.1);
+
+  /* Container effects */
+  --color-container-gradient-1: rgba(0, 255, 0, 0.1);
+  --color-container-gradient-2: rgba(0, 0, 255, 0.1);
+
+  /* Footer */
+  --color-footer-bg: rgba(20, 20, 20, 0.95);
+  --color-footer-border: rgba(0, 255, 0, 0.1);
+  --color-footer-shadow: rgba(0, 255, 0, 0.1);
+
+  /* Effects */
+  --color-text-shadow: rgba(0, 255, 0, 0.5);
+  --color-text-shadow-strong: rgba(0, 255, 0, 0.8);
+  --color-image-shadow: rgba(0, 255, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+/* Matrix-like background effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      var(--color-matrix-overlay),
+      var(--color-matrix-overlay)
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 1px,
+      var(--color-matrix-lines) 1px,
+      var(--color-matrix-lines) 2px
+    );
+  background-size: 100% 2px;
+  animation: scan 1s linear infinite;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Container for the main content and code decoration */
+.main-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Left scrolling code */
+.code-scroll-left {
+  position: absolute;
+  left: 50px;
+  height: 100%;
+  width: 30px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.code-scroll-left::after {
+  content: "{ code } < /> $ git push origin main _ npm install webpack build docker run dev test lint fix commit push";
+  position: absolute;
+  color: var(--color-matrix-lines);
+  font-size: 1rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  animation: scrollUp 20s linear infinite;
+}
+
+/* Right scrolling code */
+.code-scroll-right {
+  position: absolute;
+  right: 50px;
+  height: 100%;
+  width: 30px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.code-scroll-right::after {
+  content: "const async function () => { return data } export default class extends React useState useEffect";
+  position: absolute;
+  color: var(--color-matrix-lines);
+  font-size: 1rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  animation: scrollDown 20s linear infinite;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 90vh;
+  width: 100%;
+  padding: 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    var(--color-container-gradient-1),
+    var(--color-container-gradient-2)
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 20px var(--color-image-shadow));
+  position: relative;
+}
+
+/* Glitch effect on image */
+.container img:hover {
+  animation: glitch 0.3s infinite;
+}
+
+footer {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-footer-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  z-index: 1;
+  border: 1px solid var(--color-footer-border);
+  box-shadow: 0 0 10px var(--color-footer-shadow);
+}
+
+.contact-email {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--color-accent);
+}
+
+.contact-email a {
+  color: var(--color-accent);
+  text-decoration: none;
+  position: relative;
+}
+
+.contact-email a:hover {
+  text-decoration: none;
+  text-shadow: 0 0 8px var(--color-text-shadow);
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: var(--color-accent);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--color-text-shadow-strong);
+  text-shadow: 0 0 10px var(--color-text-shadow-strong);
+  transform: translateY(-2px);
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes glitch {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .code-scroll-left {
+    left: 20px;
+  }
+
+  .code-scroll-right {
+    right: 20px;
+  }
+
+  .code-scroll-left::after,
+  .code-scroll-right::after {
+    font-size: 0.8rem;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  footer {
+    margin: 10px;
+    padding: 15px;
+    margin-top: -50px; /* Move footer higher on mobile */
+  }
+}
